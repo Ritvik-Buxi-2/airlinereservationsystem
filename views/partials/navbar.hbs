@@ -15,7 +15,12 @@
                 </li> --}}
             </ul>
             <form class="d-flex">
+                {{#if in}}
+                <a class="btn btn-light mx-1" href="/profile" type="submit"><i class="bi bi-person-fill"></i> {{user}}</a>
+                <a class="btn btn-secondary mx-1" href="/logout" type="submit"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                {{else}}
                 <a class="btn btn-light" href="/login" type="submit"><i class="bi bi-key-fill"></i> Login</a>
+                {{/if}}
             </form>
         </div>
     </div>

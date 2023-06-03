@@ -1,9 +1,16 @@
 const express = require("express");
+const jwt = require("../modules/token");
 
 const mainRouter = express.Router();
 
 mainRouter.get("/", (req, res) => {
-  res.render("index");
+  jwt.verifyToken(req, res, (status) => {
+    if (status) {
+      res.render("index", { in: true, user: status.data });
+    } else {
+      res.render("index", { in: false });
+    }
+  });
 });
 
 mainRouter.get("/home", (req, res) => {
@@ -11,11 +18,29 @@ mainRouter.get("/home", (req, res) => {
 });
 
 mainRouter.get("/login", (req, res) => {
-  res.render("login");
+  jwt.verifyToken(req, res, (status) => {
+    if (status) {
+      res.redirect("/");
+    } else {
+      res.render("login", { in: false });
+    }
+  });
 });
 
 mainRouter.get("/register", (req, res) => {
-  res.render("register");
+  jwt.verifyToken(req, res, (status) => {
+    if (status) {
+      res.redirect("/");
+    } else {
+      res.render("register", { in: false });
+    }
+  });
+});
+
+mainRouter.get("/logout", (req, res) => {
+  jwt.clearToken(req, res, () => {
+    res.redirect("/");
+  });
 });
 
 module.exports = mainRouter;

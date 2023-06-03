@@ -9,14 +9,15 @@ const createToken = (req, res, user, next) => {
   next();
 };
 
-const verifyToken = (req, res, user, next) => {
+const verifyToken = (req, res, next) => {
   try {
     const token = req.cookies.jwt;
     jwt.verify(token, process.env.JWT_SECRET, (err, verifiedJwt) => {
       if (err) {
+        res.clearCookie("jwt");
         next(false);
       } else {
-        next(token);
+        next(verifiedJwt);
       }
     });
   } catch (error) {
@@ -24,4 +25,13 @@ const verifyToken = (req, res, user, next) => {
   }
 };
 
-module.exports = { createToken, verifyToken };
+const clearToken = (req, res, next) => {
+  try {
+    res.clearCookie("jwt");
+    next();
+  } catch (error) {
+    next();
+  }
+};
+
+module.exports = { createToken, verifyToken, clearToken };

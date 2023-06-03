@@ -18,7 +18,6 @@ const loginAuth = async (req, res, next) => {
             next(true);
           });
         } else {
-          // console.log("Password invalid");
           next(false);
         }
       }
@@ -29,6 +28,9 @@ const loginAuth = async (req, res, next) => {
 const registerAuth = async (req, res, next) => {
   const username = req.body.username,
     email = req.body.email,
+    firstname = req.body.firstname,
+    middlename = req.body.middlename,
+    lastname = req.body.lastname,
     password = await bcrypt.hash(req.body.password, parseInt(process.env.HASH));
   db.query(
     "SELECT * FROM tbusers WHERE username = ? OR email = ?",
@@ -36,8 +38,16 @@ const registerAuth = async (req, res, next) => {
     (err, result) => {
       if (result.length === 0) {
         db.query(
-          `INSERT INTO tbusers (username, email, password, dateCreated, dateModified) VALUES (?, ?, ?, now(), now())`,
-          [username, email, password],
+          `INSERT INTO tbusers (username, email, password, firstname, middlename, lastname, dateCreated, dateModified, rank) VALUES (?, ?, ?, ?, ?, ?, now(), now(), ?)`,
+          [
+            username,
+            email,
+            password,
+            firstname,
+            middlename,
+            lastname,
+            process.env.RANK_1,
+          ],
           (e, r) => {
             if (e) console.error(e);
             else next(false, false, true);
