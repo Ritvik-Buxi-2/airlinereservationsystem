@@ -11,7 +11,7 @@
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
 
-    <title>Login to ARS</title>
+    <title>Profile - {{user}} | ARS</title>
 </head>
 
 <body>
@@ -20,7 +20,7 @@
     <div class="card bg-primary m-4 px-2 pt-4 pb-3 w-50 mx-auto">
         <h2 class="text-center text-light">Profile</h2>
         <hr class="border-light border-2 opacity-100 col-md-6 mx-auto">
-        <form class="mx-auto w-75 text-light m-3 vstack gap-4" method="post" action="/auth/register">
+        <form class="mx-auto w-75 text-light m-3 vstack gap-4" method="post" action="/auth/update-profile">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1"><i class="bi bi-person mx-1"></i>Username
                 </span>
@@ -53,10 +53,16 @@
             </div>
             <div class="row">
                 <div class="mx-auto col-sm-12 col-md-12 col-lg-5">
-                    <button type="/auth/update-profile" class="btn w-100 text-center text-primary btn-light" disabled title="Under development">Update</button>
+                    <button type="submit" class="btn w-100 text-center text-primary btn-light">Update</button>
                 </div>
             </div>
         </form>
+        {{#if updated}}
+        <div class="alert alert-dismissible fade show alert-success d-flex align-items-center" role="alert">
+            <i class="bi bi-check-circle-fill mx-3"></i>
+            Account details successfully updated
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div> {{/if}}
     </div>
 
 

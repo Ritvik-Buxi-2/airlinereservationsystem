@@ -74,8 +74,23 @@ const getUserData = (status, next) => {
       } else {
         next(result);
       }
+      if (err) throw err;
     }
   );
 };
 
-module.exports = { loginAuth, registerAuth, getUserData };
+const updateUserData = (user, data, next) => {
+  db.query(
+    `UPDATE tbusers SET firstname = ?, middlename = ?, lastname = ? WHERE username = ?`,
+    [data.firstname, data.middlename, data.lastname, user],
+    (err, result) => {
+      if (err) {
+        next(false);
+      } else {
+        next(true);
+      }
+    }
+  );
+};
+
+module.exports = { loginAuth, registerAuth, getUserData, updateUserData };

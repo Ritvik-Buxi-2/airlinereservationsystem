@@ -57,9 +57,10 @@ mainRouter.get("/profile", (req, res) => {
             firstname: data[0].firstname,
             middlename: data[0].middlename,
             lastname: data[0].lastname,
+            updated: req.url.split("=")[1] == "true" ? true : false,
           });
         } else {
-          res.redirect("/login")
+          res.redirect("/login");
         }
       });
     } else {
