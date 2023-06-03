@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+
+    <title>Login to ARS</title>
+</head>
+
+<body>
+    {{> navbar}}
+
+    <div class="card bg-primary m-4 px-2 pt-4 pb-3 w-50 mx-auto">
+        <h2 class="text-center text-light">Profile</h2>
+        <hr class="border-light border-2 opacity-100 col-md-6 mx-auto">
+        <form class="mx-auto w-75 text-light m-3 vstack gap-4" method="post" action="/auth/register">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-person mx-1"></i>Username
+                </span>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Username"
+                    aria-describedby="basic-addon1" title="Usernames are unique" value="{{user}}" required disabled>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-envelope-at mx-1"></i> Email
+                </span>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email"
+                    aria-describedby="basic-addon1" title="Email should be unique" value="{{email}}" required disabled>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">First Name
+                </span>
+                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name"
+                    aria-describedby="basic-addon1" title="First Name" value="{{firstname}}" required>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Middle Name
+                </span>
+                <input type="text" class="form-control" id="middlename" name="middlename" placeholder="Middle Name"
+                    aria-describedby="basic-addon1" title="Middle Name" value="{{middlename}}">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Last Name
+                </span>
+                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name"
+                    aria-describedby="basic-addon1" title="Last Name" value="{{lastname}}" required>
+            </div>
+            <div class="row">
+                <div class="mx-auto col-sm-12 col-md-12 col-lg-5">
+                    <button type="/auth/update-profile" class="btn w-100 text-center text-primary btn-light" disabled title="Under development">Update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

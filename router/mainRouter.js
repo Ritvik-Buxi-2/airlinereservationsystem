@@ -1,6 +1,8 @@
 const express = require("express");
 const jwt = require("../modules/token");
 
+const sqlAuth = require("../modules/sqlAuth");
+
 const mainRouter = express.Router();
 
 mainRouter.get("/", (req, res) => {
@@ -43,4 +45,29 @@ mainRouter.get("/logout", (req, res) => {
   });
 });
 
+mainRouter.get("/profile", (req, res) => {
+  jwt.verifyToken(req, res, (status) => {
+    if (status) {
+      sqlAuth.getUserData(status, (data) => {
+        if (data) {
+          res.render("profile", {
+            in: true,
+            user: status.data || data[0].username,
+            email: data[0].email,
+            firstname: data[0].firstname,
+            middlename: data[0].middlename,
+            lastname: data[0].lastname,
+          });
+        } else {
+          res.redirect("/login")
+        }
+      });
+    } else {
+      res.redirect("/login");
+    }
+  });
+});
+
 module.exports = mainRouter;
+
+// // Tokens are destroyed in the module

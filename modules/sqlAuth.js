@@ -64,4 +64,18 @@ const registerAuth = async (req, res, next) => {
   );
 };
 
-module.exports = { loginAuth, registerAuth };
+const getUserData = (status, next) => {
+  db.query(
+    `SELECT * FROM tbusers WHERE username = ?`,
+    [status.data],
+    (err, result) => {
+      if (result.length === 0) {
+        next(false);
+      } else {
+        next(result);
+      }
+    }
+  );
+};
+
+module.exports = { loginAuth, registerAuth, getUserData };

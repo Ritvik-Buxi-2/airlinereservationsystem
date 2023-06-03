@@ -2,7 +2,7 @@ const express = require("express");
 
 const authRouter = express.Router();
 
-const sqlAuth = require("../modules/sqlauth");
+const sqlAuth = require("../modules/sqlAuth");
 
 authRouter.post("/login", (req, res) => {
   sqlAuth.loginAuth(req, res, (status) => {
