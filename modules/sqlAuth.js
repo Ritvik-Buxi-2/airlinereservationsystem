@@ -1,9 +1,30 @@
 const bcrypt = require("bcryptjs");
 const mysql = require("mysql");
 const db = require("./db");
-const { use } = require("../router/mainRouter");
+const jwt = require("../modules/token");
 
-const loginAuth = () => {};
+const loginAuth = async (req, res, next) => {
+  const username = req.body.username,
+    password = req.body.password;
+  db.query(
+    "SELECT * FROM tbusers WHERE username = ?",
+    [username],
+    async (err, result) => {
+      if (result.length === 0) {
+        next(false);
+      } else {
+        if (await bcrypt.compare(password, result[0].password)) {
+          jwt.createToken(req, res, username, () => {
+            next(true);
+          });
+        } else {
+          // console.log("Password invalid");
+          next(false);
+        }
+      }
+    }
+  );
+};
 
 const registerAuth = async (req, res, next) => {
   const username = req.body.username,

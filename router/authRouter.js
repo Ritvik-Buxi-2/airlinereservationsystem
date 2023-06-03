@@ -5,7 +5,13 @@ const authRouter = express.Router();
 const sqlAuth = require("../modules/sqlauth");
 
 authRouter.post("/login", (req, res) => {
-  // ? Add names to login form
+  sqlAuth.loginAuth(req, res, (status) => {
+    if (status) {
+      res.redirect("/");
+    } else {
+      res.render("login", { errorMsg: true });
+    }
+  });
 });
 
 authRouter.post("/register", (req, res, msg) => {

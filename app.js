@@ -3,6 +3,8 @@ const dotenv = require("dotenv").config();
 const hbs = require("hbs");
 const path = require("path");
 const bodyParser = require("body-parser");
+const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
 
 const mainRouter = require("./router/mainRouter");
 const authRouter = require("./router/authRouter");
@@ -12,6 +14,7 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 app.set("view engine", "hbs");
 hbs.registerPartials(path.join(__dirname, "/views/partials"), function (err) {
