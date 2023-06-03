@@ -8,6 +8,7 @@ const cookieParser = require("cookie-parser");
 
 const mainRouter = require("./router/mainRouter");
 const authRouter = require("./router/authRouter");
+const adminRouter = require("./router/adminRouter");
 const db = require("./modules/db");
 
 const app = express();
@@ -28,6 +29,7 @@ db.connect((e) => {
 
 app.use("/", mainRouter);
 app.use("/auth", authRouter);
+app.use("/admin", adminRouter);
 
 app.listen(process.env.PORT, () => {
   console.log("Application online");

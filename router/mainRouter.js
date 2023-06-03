@@ -8,7 +8,13 @@ const mainRouter = express.Router();
 mainRouter.get("/", (req, res) => {
   jwt.verifyToken(req, res, (status) => {
     if (status) {
-      res.render("index", { in: true, user: status.data });
+      sqlAuth.getUserRank(status.data, (rank) => {
+        res.render("index", {
+          in: true,
+          user: status.data,
+          admin: rank === "admin" ? true : false,
+        });
+      });
     } else {
       res.render("index", { in: false });
     }
@@ -50,14 +56,17 @@ mainRouter.get("/profile", (req, res) => {
     if (status) {
       sqlAuth.getUserData(status, (data) => {
         if (data) {
-          res.render("profile", {
-            in: true,
-            user: status.data || data[0].username,
-            email: data[0].email,
-            firstname: data[0].firstname,
-            middlename: data[0].middlename,
-            lastname: data[0].lastname,
-            updated: req.url.split("=")[1] == "true" ? true : false,
+          sqlAuth.getUserRank(status.data, (rank) => {
+            res.render("profile", {
+              in: true,
+              admin: rank === "admin" ? true : false,
+              user: status.data || data[0].username,
+              email: data[0].email,
+              firstname: data[0].firstname,
+              middlename: data[0].middlename,
+              lastname: data[0].lastname,
+              updated: req.url.split("=")[1] == "true" ? true : false,
+            });
           });
         } else {
           res.redirect("/login");

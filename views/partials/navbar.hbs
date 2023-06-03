@@ -16,8 +16,20 @@
             </ul>
             <form class="d-flex">
                 {{#if in}}
-                <a class="btn btn-light mx-1" href="/profile" type="submit"><i class="bi bi-person-fill"></i> {{user}}</a>
-                <a class="btn btn-secondary mx-1" href="/logout" type="submit"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                {{#if admin}}
+                <a class="btn btn-success mx-1" href="/admin/dashboard" type="submit"><i
+                        class="bi bi-person-fill-up"></i> 
+                    Elevate to Admin</a>
+                {{/if}}
+                {{#if elevated}}
+                <a class="btn btn-success mx-1" href="/" type="submit"><i
+                        class="bi bi-person-fill-up"></i> 
+                    Exit Admin</a>
+                {{/if}}
+                <a class="btn btn-light mx-1" href="/profile" type="submit"><i class="bi bi-person-fill"></i>
+                    {{user}}</a>
+                <a class="btn btn-secondary mx-1" href="/logout" type="submit"><i class="bi bi-box-arrow-right"></i>
+                    Logout</a>
                 {{else}}
                 <a class="btn btn-light" href="/login" type="submit"><i class="bi bi-key-fill"></i> Login</a>
                 {{/if}}

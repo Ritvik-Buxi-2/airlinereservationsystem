@@ -81,7 +81,7 @@ const getUserData = (status, next) => {
 
 const updateUserData = (user, data, next) => {
   db.query(
-    `UPDATE tbusers SET firstname = ?, middlename = ?, lastname = ? WHERE username = ?`,
+    `UPDATE tbusers SET firstname = ?, middlename = ?, lastname = ?, datemodified = now() WHERE username = ?`,
     [data.firstname, data.middlename, data.lastname, user],
     (err, result) => {
       if (err) {
@@ -93,4 +93,20 @@ const updateUserData = (user, data, next) => {
   );
 };
 
-module.exports = { loginAuth, registerAuth, getUserData, updateUserData };
+const getUserRank = (user, next) => {
+  db.query(`SELECT rank FROM tbusers WHERE username = ?`, [user], (err, result) => {
+    if (result.length === 0) {
+      next(false);
+    } else {
+      next(result[0].rank);
+    }
+  });
+};
+
+module.exports = {
+  loginAuth,
+  registerAuth,
+  getUserData,
+  updateUserData,
+  getUserRank,
+};
