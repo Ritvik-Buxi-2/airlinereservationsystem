@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+
+    <title>Login to ARS</title>
+</head>
+
+<body>
+    {{> navbar}}
+
+    <div class="container w-100 px-5 py-4 mt-5 bg-primary text-center">
+        <div class="row">
+            <div class="col p-3 text-light">
+                <h2>User Management Dashboard</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="table table-hover table-bordered align-middle">
+                    <thead class="align-middle table-primary">
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>First Name</th>
+                            <th>Middle Name</th>
+                            <th>Last Name</th>
+                            <th>Date Created</th>
+                            <th>Date Modified</th>
+                            <th>Rank</th>
+                            <th colspan="4">Controls</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each users}}
+                        <tr>
+                            <td>{{#sno}}{{@index}}{{/sno}}</td>
+                            <td>{{this.username}}</td>
+                            <td>{{this.email}}</td>
+                            <td>{{this.firstname}}</td>
+                            <td>{{this.middlename}}</td>
+                            <td>{{this.lastname}}</td>
+                            <td>{{this.dateCreated}}</td>
+                            <td>{{this.dateModified}}</td>
+                            <td>{{rank}}</td>
+                            <td><a class="btn btn-primary" href=""><i class="bi bi-pencil-fill"></i></a></td>
+                            <td><a href="" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a></td>
+                            <td><a href="" class="btn btn-success"><i class="bi bi-person-fill-up"></i></a></td>
+                            <td><a href="" class="btn btn-warning"><i class="bi bi-person-fill-down"></i></a></td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column"><a href="/admin/dashboard" class="btn btn-light">Go back</a></div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

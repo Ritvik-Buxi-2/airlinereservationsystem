@@ -25,4 +25,21 @@ adminRouter.get("/dashboard", (req, res) => {
   });
 });
 
+adminRouter.get("/manage-users", (req, res) => {
+  jwt.verifyToken(req, res, (token) => {
+    sqlAuth.getUserRank(token.data, (rank) => {
+      if (rank === "admin") {
+        sqlAdmin.getUsers((users) => {
+          res.render("admin_user_management", {
+            elevated: true,
+            in: true,
+            user: token.data,
+            users: users,
+          });
+        });
+      } else res.redirect("/");
+    });
+  });
+});
+
 module.exports = adminRouter;

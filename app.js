@@ -22,6 +22,11 @@ hbs.registerPartials(path.join(__dirname, "/views/partials"), function (err) {
   if (err) console.error(err);
 });
 
+hbs.registerHelper("sno", (options) => {
+  return parseInt(options.fn(this)) + 1;
+});
+
+
 db.connect((e) => {
   if (e) console.error(e);
   else console.log("Database connected");

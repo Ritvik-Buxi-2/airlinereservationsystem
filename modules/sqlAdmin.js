@@ -10,4 +10,10 @@ const getDashboardData = (next) => {
   });
 };
 
-module.exports = { getDashboardData };
+const getUsers = (next) => {
+  db.query(`SELECT * FROM tbusers`, (err, result) => {
+    next(result);
+  });
+};
+
+module.exports = { getDashboardData, getUsers };
