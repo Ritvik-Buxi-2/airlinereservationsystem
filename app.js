@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 const mainRouter = require("./router/mainRouter");
 const authRouter = require("./router/authRouter");
 const adminRouter = require("./router/adminRouter");
+const adminAuthRouter = require("./router/adminAuthRouter");
 const db = require("./modules/db");
 
 const app = express();
@@ -26,7 +27,6 @@ hbs.registerHelper("sno", (options) => {
   return parseInt(options.fn(this)) + 1;
 });
 
-
 db.connect((e) => {
   if (e) console.error(e);
   else console.log("Database connected");
@@ -35,6 +35,7 @@ db.connect((e) => {
 app.use("/", mainRouter);
 app.use("/auth", authRouter);
 app.use("/admin", adminRouter);
+app.use("/admin/auth", adminAuthRouter);
 
 app.listen(process.env.PORT, () => {
   console.log("Application online");

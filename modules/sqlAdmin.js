@@ -16,4 +16,15 @@ const getUsers = (next) => {
   });
 };
 
-module.exports = { getDashboardData, getUsers };
+const deleteUser = (id, next) => {
+  if (id == 1) {
+    next();
+  } else {
+    db.query(`DELETE FROM tbusers WHERE id = ?`, [id], (err, res) => {
+      if (err) console.error(err);
+      else next();
+    });
+  }
+};
+
+module.exports = { getDashboardData, getUsers, deleteUser };

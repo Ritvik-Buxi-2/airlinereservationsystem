@@ -52,10 +52,10 @@
                             <td>{{this.dateCreated}}</td>
                             <td>{{this.dateModified}}</td>
                             <td>{{rank}}</td>
-                            <td><a class="btn btn-primary" href=""><i class="bi bi-pencil-fill"></i></a></td>
-                            <td><a href="" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a></td>
-                            <td><a href="" class="btn btn-success"><i class="bi bi-person-fill-up"></i></a></td>
-                            <td><a href="" class="btn btn-warning"><i class="bi bi-person-fill-down"></i></a></td>
+                            <td><form action="/admin/auth/edituser?id={{this.id}}" method="post"><button type="submit" class="btn btn-primary"><i class="bi bi-pencil-fill"></i></button></form></td>
+                            <td><form action="/admin/auth/deleteuser?id={{this.id}}" method="post"><button type="submit" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button></form></td>
+                            <td><form action="/admin/auth/elevateuser?id={{this.id}}" method="post"><button type="submit" class="btn btn-success"><i class="bi bi-person-fill-up"></i></button></form></td>
+                            <td><form action="/admin/auth/loweruser?id={{this.id}}" method="post"><button type="submit" class="btn btn-warning"><i class="bi bi-person-fill-down"></i></button></form></td>
                         </tr>
                         {{/each}}
                     </tbody>
